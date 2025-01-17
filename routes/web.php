@@ -56,7 +56,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/admin', function () {
             return view('admin.dashboard');
         })->name('admin.dashboard');
-    
+
         Route::resource('users', AdminUserController::class)->except(['show']);
         Route::resource('categories', CategoryController::class)->except(['show']);
         Route::resource('ebooks', EbooksController::class)->except(['show']);
@@ -64,18 +64,11 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('books', BookContrller::class)->except(['show']);
         Route::resource('rekening', RekeningController::class);
     });
-    
+
     Route::get('/user', function () {
         return view('user.dashboard');
     })->middleware('role:user')->name('user.dashboard');
 
-    Route::middleware(['auth', 'role:user'])->group(function () {
-        Route::get('/user', function () {
-            return view('user.dashboard');
-        })->name('user.dashboard');
-
-        Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
-        Route::post('/profile/edit', [ProfileController::class, 'update'])->name('profile.update');
-    });
-
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 });

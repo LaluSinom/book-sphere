@@ -15,40 +15,18 @@
             Profile updated successfully.
         </div>
 
-        <form id="edit-profile-form" action="/profile/edit" method="POST">
-            <!-- CSRF Token -->
-            <input type="hidden" name="_token" value="CSRF_TOKEN_PLACEHOLDER">
-
-            <!-- Name Field -->
+        <form action="{{ route('profile.update') }}" method="POST">
             <div class="mb-3">
-                <label for="name" class="form-label">Name</label>
-                <input type="text" class="form-control" id="name" name="name" value="CURRENT_USER_NAME" required>
-                <div class="invalid-feedback" id="name-error"></div>
+                <label for="name" class="form-label">Nama</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{ old('name', auth()->user()->name) }}">
             </div>
-
-            <!-- Email Field -->
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" name="email" value="CURRENT_USER_EMAIL" required>
-                <div class="invalid-feedback" id="email-error"></div>
+                <input type="email" class="form-control" id="email" name="email" value="{{ old('email', auth()->user()->email) }}">
             </div>
-
-            <!-- Password Field -->
-            <div class="mb-3">
-                <label for="password" class="form-label">Password (leave blank if not changing)</label>
-                <input type="password" class="form-control" id="password" name="password">
-                <div class="invalid-feedback" id="password-error"></div>
-            </div>
-
-            <!-- Confirm Password Field -->
-            <div class="mb-3">
-                <label for="password_confirmation" class="form-label">Confirm Password</label>
-                <input type="password" class="form-control" id="password_confirmation" name="password_confirmation">
-            </div>
-
-            <!-- Submit Button -->
-            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <button type="submit" class="btn btn-primary">Simpan</button>
         </form>
+        
     </div>
 
     <script>
